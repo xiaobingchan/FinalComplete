@@ -1,0 +1,36 @@
+[ceph-iscsi]
+name=ceph-iscsi noarch packages
+baseurl=http://download.ceph.com/ceph-iscsi/3/rpm/el8/noarch
+enabled=1
+gpgcheck=1
+gpgkey=https://download.ceph.com/keys/release.asc
+type=rpm-md
+
+[ceph-iscsi-source]
+name=ceph-iscsi source packages
+baseurl=http://download.ceph.com/ceph-iscsi/3/rpm/el8/SRPMS
+enabled=0
+gpgcheck=1
+gpgkey=https://download.ceph.com/keys/release.asc
+type=rpm-md
+
+[tcmu-runner]
+name=tcmu-runner packages for $basearch
+baseurl=https://3.chacra.ceph.com/r/tcmu-runner/master/1793db5ea90f15db9277b0aaa32dd5da2e38b1d3/centos/8/flavors/default/$basearch
+enabled=1
+gpgcheck=0
+type=rpm-md
+
+[tcmu-runner-noarch]
+name=tcmu-runner noarch packages
+baseurl=https://3.chacra.ceph.com/r/tcmu-runner/master/1793db5ea90f15db9277b0aaa32dd5da2e38b1d3/centos/8/flavors/default/noarch
+enabled=1
+gpgcheck=0
+type=rpm-md
+
+[tcmu-runner-source]
+name=tcmu-runner source packages
+baseurl=https://3.chacra.ceph.com/r/tcmu-runner/master/1793db5ea90f15db9277b0aaa32dd5da2e38b1d3/centos/8/flavors/default/SRPMS
+enabled=1
+gpgcheck=0
+type=rpm-md

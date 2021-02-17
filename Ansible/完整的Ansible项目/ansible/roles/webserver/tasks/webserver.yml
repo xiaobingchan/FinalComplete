@@ -1,0 +1,35 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: no
+  vars:
+    private_ip_route: 192.168.16.1
+    gcp_project_id: hsbc-11005769-opsrmrm-dev
+    gcp_location: europe-west2
+    instance_name: oprimrirflow-59c091a9
+    db_proxy_port:  3307
+    db_user: muytyrm
+    db_passwd: ewewemrm123
+    db_name: dbnmrm
+    cloudproxy: /opt/cloudsql/cloud_sql_proxy
+    airflow_path: /opt/airflow
+    airflow_port: 8080
+  tasks:
+    - name: change nic1
+      shell: "route add -net 192.168.0.0/16 gw {{private_ip_route}}"
+
+    - name: start cloudsql
+      shell: "nohup /opt/cloudsql/cloud_sql_proxy -instances={{gcp_project_id}}:{{gcp_location}}:{{instance_name}}=tcp:{{db_proxy_port}} -ip_address_types=PRIVATE > /opt/cloudsql/startup.log &"
+
+    - name: copy airflow.cfg to airflow home
+      template: src=scheduler.service.j2 dest={{airflow_path}}/airflow.cfg mode=0755
+      run_once: true
+      delegate_to: 127.0.0.1
+      tags:
+        - g_yaml
+
+    - name: start airflow webserver
+      shell: "/opt/anaconda/bin/airflow webserver -D"
+    
+    - name: start airflow scheduler
+      shell: "/opt/anaconda/bin/airflow scheduler -D"

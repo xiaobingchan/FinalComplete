@@ -1,0 +1,14 @@
+[Unit]
+Description=scheduler
+After=syslog.target network.target
+
+[Service]
+User=root
+Type=forking
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/anaconda/bin"
+ExecStart=airflow scheduler
+PrivateTmp=true
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+---
+
+- name: Run webserver tasks
+  hosts: all
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - webserver
